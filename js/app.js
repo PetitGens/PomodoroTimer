@@ -1,7 +1,10 @@
 let seconds = 0;
 let minutes = 25;
 
-decrementTimer();
+let startButton = document.getElementById("startButton");
+
+startButton.addEventListener("click", () => startTimer(25));
+
 updateTimerDisplay();
 
 function updateTimerDisplay(){
@@ -19,4 +22,17 @@ function decrementTimer(){
         seconds += 60;
         minutes --;
     }
+    updateTimerDisplay();
+
+    if(seconds == 0 && minutes == 0){
+        clearInterval(); // Stops the countdown when it reaches 0
+    }
+}
+
+function startTimer(duration){
+    minutes = duration - 1;
+    seconds = 59;
+    updateTimerDisplay();
+
+    setInterval(() => decrementTimer(), 1000);
 }
