@@ -1,9 +1,26 @@
+const WORKING_TIME = 25;
+const BREAK_TIME = 5;
+
+const DEBUGGING = true;
+
+const INTERVAL = DEBUGGING ? 1 : 1000; // Should be 1000 if not debugging
+
+const WORKING_STATE = 0;
+const BREAK_STATE = 1;
+
 let seconds = 0;
-let minutes = 25;
+let minutes = WORKING_TIME;
+
+let intervalID;
+
+let currentState = WORKING_STATE;
 
 let startButton = document.getElementById("startButton");
+let resetButton = document.getElementById("resetButton");
+resetButton.classList.add("hidden");
 
-startButton.addEventListener("click", () => startTimer(25));
+startButton.addEventListener("click", startTimersLoop);
+resetButton.addEventListener("click", resetTimer);
 
 updateTimerDisplay();
 
@@ -25,14 +42,51 @@ function decrementTimer(){
     updateTimerDisplay();
 
     if(seconds == 0 && minutes == 0){
-        clearInterval(); // Stops the countdown when it reaches 0
+        onTimeOut(); // Stops the countdown when it reaches 0
     }
 }
 
-function startTimer(duration){
-    minutes = duration - 1;
-    seconds = 59;
+function onTimeOut(){
+    console.log("coucou");
+    clearInterval(intervalID); // Stops the countdown
+
+    currentState = (currentState + 1) % 2; // Toggle the current state
+
+    startTimer();
+}
+
+function resetTimer(){
+    clearInterval(intervalID);
+
+    seconds = 0;
+    minutes = WORKING_TIME;
     updateTimerDisplay();
 
-    setInterval(() => decrementTimer(), 1000);
+    currentState = WORKING_STATE;
+
+    toggleButtons();
+}
+
+function startTimersLoop(){
+    toggleButtons();
+    startTimer();
+}
+
+function startTimer(){
+    minutes = BREAK_TIME;
+    seconds = 0;
+
+    if(currentState == WORKING_STATE){
+        minutes = WORKING_TIME - 1;
+        seconds = 59;
+    }
+
+    updateTimerDisplay();
+
+    intervalID = setInterval(() => decrementTimer(), INTERVAL);
+}
+
+function toggleButtons(){
+    startButton.classList.toggle("hidden");
+    resetButton.classList.toggle("hidden");
 }
