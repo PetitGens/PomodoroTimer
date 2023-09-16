@@ -1,2 +1,2 @@
 # PomodoroTimer
-Pomodoro Timer for my IT studies at Caen.
+My very first Javascript project for my IT studies at Caen.
