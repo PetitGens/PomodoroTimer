@@ -9,3 +9,28 @@ h1{
 button.hidden {
     display: none;
 }
+
+#statusBar{
+    margin-left: auto;
+    margin-right: auto;
+    /*min-width: 10%;
+    max-width: 20%;*/
+    width: fit-content;
+    border: solid;
+    
+    padding: 5px;
+
+    text-align: center;
+    font-size: 24px;
+}
+
+span.status{
+    margin-left: 5px;
+    margin-right: 5px;
+
+    color: darkgrey;
+}
+
+span.active{
+    color: blue;
+}

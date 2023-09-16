@@ -5,6 +5,7 @@ const DEBUGGING = true;
 
 const INTERVAL = DEBUGGING ? 1 : 1000; // Should be 1000 if not debugging
 
+const IDLE_STATE = 2
 const WORKING_STATE = 0;
 const BREAK_STATE = 1;
 
@@ -13,7 +14,9 @@ let minutes = WORKING_TIME;
 
 let intervalID;
 
-let currentState = WORKING_STATE;
+let currentState = IDLE_STATE;
+
+// DOM elements
 
 let startButton = document.getElementById("startButton");
 let resetButton = document.getElementById("resetButton");
@@ -21,6 +24,9 @@ resetButton.classList.add("hidden");
 
 startButton.addEventListener("click", startTimersLoop);
 resetButton.addEventListener("click", resetTimer);
+
+let workingStatus = document.getElementById("workingStatus");
+let breakStatus = document.getElementById("breakStatus");
 
 updateTimerDisplay();
 
@@ -31,6 +37,52 @@ function updateTimerDisplay(){
     let minutesString = minutes.toString().padStart(2, '0');
 
     timerElement.textContent = `${minutesString}:${secondsString}`;
+}
+
+function updateStatusDisplay(){
+    let workingActive;
+    let breakActive;
+    switch(currentState){
+        case WORKING_STATE:
+            workingActive = true;
+            breakActive = false;
+            break;
+        case BREAK_STATE:
+            workingActive = false;
+            breakActive = true;
+            break;
+        default:
+            workingActive = false;
+            breakActive = false;
+    }
+
+    /*workingStatus.remove("active");
+    console.log(breakStatus.classList);
+    /*breakStatus.remove("active");*/
+
+    /*if(workingActive){
+        workingStatus.classList.add("active");
+    }
+
+    if(breakActive){
+        breakStatus.classList.add("active");
+    }*/
+
+    makeStatusElementActive(workingStatus, workingActive);
+    makeStatusElementActive(breakStatus, breakActive);
+
+    console.log(workingStatus);
+    console.log(breakStatus);
+}
+
+function makeStatusElementActive(element, active){
+    if(active && ! element.classList.contains(active)){
+        element.classList.add("active");
+    }
+
+    else if(! active && element.classList.remove("active")){
+        element.classList.remove("active");
+    }
 }
 
 function decrementTimer(){
@@ -51,6 +103,7 @@ function onTimeOut(){
     clearInterval(intervalID); // Stops the countdown
 
     currentState = (currentState + 1) % 2; // Toggle the current state
+    updateStatusDisplay();
 
     startTimer();
 }
@@ -62,12 +115,15 @@ function resetTimer(){
     minutes = WORKING_TIME;
     updateTimerDisplay();
 
-    currentState = WORKING_STATE;
+    currentState = IDLE_STATE;
+    updateStatusDisplay();
 
     toggleButtons();
 }
 
 function startTimersLoop(){
+    currentState = WORKING_STATE;
+    updateStatusDisplay();
     toggleButtons();
     startTimer();
 }
