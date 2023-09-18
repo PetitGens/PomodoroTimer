@@ -1,7 +1,7 @@
 const WORKING_TIME = 25;
 const BREAK_TIME = 5;
 
-const DEBUGGING = true;
+const DEBUGGING = false;
 
 const INTERVAL = DEBUGGING ? 1 : 1000; // Should be 1000 if not debugging
 
@@ -27,6 +27,35 @@ resetButton.addEventListener("click", resetTimer);
 
 let workingStatus = document.getElementById("workingStatus");
 let breakStatus = document.getElementById("breakStatus");
+
+let playButtonBlack = document.getElementById("playButtonBlack");
+let playButtonBlue = document.getElementById("playButtonBlue");
+let restartButtonBlack = document.getElementById("restartButtonBlack");
+let restartButtonBlue = document.getElementById("restartButtonBlue");
+
+
+/* Add events listeners to both buttons so that they turn blue when the mouse hover them*/
+
+startButton.addEventListener("mouseenter", () =>{
+    playButtonBlue.classList.toggle("hidden");
+    playButtonBlack.classList.toggle("hidden");
+})
+
+startButton.addEventListener("mouseleave", () =>{
+    playButtonBlue.classList.toggle("hidden");
+    playButtonBlack.classList.toggle("hidden");
+})
+
+resetButton.addEventListener("mouseenter", () =>{
+    restartButtonBlack.classList.toggle("hidden");
+    restartButtonBlue.classList.toggle("hidden");
+})
+
+resetButton.addEventListener("mouseleave", () =>{
+    restartButtonBlack.classList.toggle("hidden");
+    restartButtonBlue.classList.toggle("hidden");
+})
+
 
 updateTimerDisplay();
 
@@ -56,18 +85,6 @@ function updateStatusDisplay(){
             breakActive = false;
     }
 
-    /*workingStatus.remove("active");
-    console.log(breakStatus.classList);
-    /*breakStatus.remove("active");*/
-
-    /*if(workingActive){
-        workingStatus.classList.add("active");
-    }
-
-    if(breakActive){
-        breakStatus.classList.add("active");
-    }*/
-
     makeStatusElementActive(workingStatus, workingActive);
     makeStatusElementActive(breakStatus, breakActive);
 
@@ -93,7 +110,7 @@ function decrementTimer(){
     }
     updateTimerDisplay();
 
-    if(seconds == 0 && minutes == 0){
+    if(seconds === 0 && minutes === 0){
         onTimeOut(); // Stops the countdown when it reaches 0
     }
 }

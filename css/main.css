@@ -4,10 +4,7 @@
 
 h1{
     text-align: center;
-}
-
-button.hidden {
-    display: none;
+    font-size: 48px;
 }
 
 #statusBar{
@@ -33,4 +30,74 @@ span.status{
 
 span.active{
     color: blue;
+}
+
+#timerContainer{
+    /* display: inline; */
+
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+
+    /*Circular border*/
+    border-radius: 100%;
+    border: 10px solid;
+
+    width: 20vw;
+    height: 20vw;
+}
+
+#timer{
+    display: flex;
+    position: absolute;
+    width: 20vw;
+    height: 20vw;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 7.2vw;
+}
+
+.startResetButtons{
+    display: flex;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 3vw;
+
+    border: solid black 5px;
+    border-radius: 50%;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#startButton{
+    width: 9vw;
+    height: 10vw;
+    padding-left: 1vw;
+}
+
+#resetButton{
+    width: 10vw;
+    height: 10vw;
+}
+
+.startResetButtons:hover{
+    border-color: #0E2C5C;
+}
+
+.startResetButtons > img{
+
+    width: 65%;
+    height: 65%;
+}
+
+div.hidden{
+    display: none;
+}
+
+img.hidden{
+    display: none;
 }
