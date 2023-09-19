@@ -1,7 +1,4 @@
-const WORKING_TIME = 25;
-const BREAK_TIME = 5;
-
-const DEBUGGING = true;
+const DEBUGGING = false;
 
 const INTERVAL = DEBUGGING ? 1 : 1000; // Should be 1000 if not debugging
 
@@ -9,8 +6,13 @@ const IDLE_STATE = 2
 const WORKING_STATE = 0;
 const BREAK_STATE = 1;
 
+let settingsTabOpen = false;
+
+let workingTime = 25;
+let breakTime = 5;
+
 let seconds = 0;
-let minutes = WORKING_TIME;
+let minutes = workingTime;
 
 let intervalID;
 
@@ -33,6 +35,17 @@ let playButtonBlue = document.getElementById("playButtonBlue");
 let restartButtonBlack = document.getElementById("restartButtonBlack");
 let restartButtonBlue = document.getElementById("restartButtonBlue");
 
+let activeSettingsButton = document.getElementById("activeSettingsButton");
+let inactiveSettingsButton = document.getElementById("inactiveSettingsButton");
+
+let timerContainer = document.getElementById("timerContainer");
+
+let durationInputArea = document.getElementById("durationInput");
+let workDurationField = document.getElementById("workDuration");
+let breakDurationField = document.getElementById("breakDuration");
+
+// Switches between timer and duration input when the gear icon is clicked
+activeSettingsButton.addEventListener("click", onGearClicked);
 
 /* Add events listeners to both buttons so that they turn blue when the mouse hover them*/
 
@@ -116,7 +129,6 @@ function decrementTimer(){
 }
 
 function onTimeOut(){
-    console.log("coucou");
     clearInterval(intervalID); // Stops the countdown
 
     currentState = (currentState + 1) % 2; // Toggle the current state
@@ -126,32 +138,37 @@ function onTimeOut(){
 }
 
 function resetTimer(){
+    // Enable settings button
+    toggleSettingsButtonActivity();
+
     clearInterval(intervalID);
 
     seconds = 0;
-    minutes = WORKING_TIME;
+    minutes = workingTime;
     updateTimerDisplay();
 
     currentState = IDLE_STATE;
     updateStatusDisplay();
 
-    toggleButtons();
+    toggleStartResetButtons();
 }
 
 function startTimersLoop(){
+    // Disable settings button
+    toggleSettingsButtonActivity();
+
     currentState = WORKING_STATE;
     updateStatusDisplay();
-    toggleButtons();
+    toggleStartResetButtons();
     startTimer();
 }
 
 function startTimer(){
-    minutes = BREAK_TIME;
+    minutes = breakTime;
     seconds = 0;
 
-    if(currentState == WORKING_STATE){
-        minutes = WORKING_TIME - 1;
-        seconds = 59;
+    if(currentState === WORKING_STATE){
+        minutes = workingTime;
     }
 
     updateTimerDisplay();
@@ -159,7 +176,49 @@ function startTimer(){
     intervalID = setInterval(() => decrementTimer(), INTERVAL);
 }
 
-function toggleButtons(){
+function toggleStartResetButtons(){
     startButton.classList.toggle("hidden");
     resetButton.classList.toggle("hidden");
+}
+
+function toggleSettingsButtonActivity(){
+    activeSettingsButton.classList.toggle("hidden");
+    inactiveSettingsButton.classList.toggle("hidden");
+}
+
+function onGearClicked(){
+    if(settingsTabOpen){
+        let workDurationValue = Number.parseInt(workDurationField.value);
+        let breakDurationValue = Number.parseInt(breakDurationField.value);
+
+        if(workDurationValue < 0 || workDurationValue > 99){
+            workDurationField.classList.add("invalid");
+            setTimeout(()=>{
+                workDurationField.classList.remove("invalid");
+            }, 500)
+            return;
+        }
+
+        if(breakDurationValue < 0 || breakDurationValue > 99){
+            breakDurationField.classList.add("invalid");
+            setTimeout(()=>{
+                breakDurationField.classList.remove("invalid");
+            }, 1000);
+            return;
+        }
+
+        workingTime = workDurationValue;
+        breakTime = breakDurationValue;
+
+        minutes = workingTime;
+        updateTimerDisplay();
+        settingsTabOpen = false;
+    }
+
+    else{
+        settingsTabOpen = true;
+    }
+
+    durationInputArea.classList.toggle("hidden");
+    timerContainer.classList.toggle("hidden");
 }
