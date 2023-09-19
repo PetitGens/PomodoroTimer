@@ -1,7 +1,7 @@
 const WORKING_TIME = 25;
 const BREAK_TIME = 5;
 
-const DEBUGGING = false;
+const DEBUGGING = true;
 
 const INTERVAL = DEBUGGING ? 1 : 1000; // Should be 1000 if not debugging
 

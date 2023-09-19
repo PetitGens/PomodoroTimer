@@ -5,34 +5,41 @@ body{
 
 h1{
     text-align: center;
-    font-size: 48px;
+    font-size: 5vh;
+    
     font-family: "Sofia", sans-serif;
 }
+
+/* Status Bar (indicates if the user should work or do a break) */
 
 #statusBar{
     margin-left: auto;
     margin-right: auto;
-    /*min-width: 10%;
-    max-width: 20%;*/
+    
     width: fit-content;
     border: solid;
     
-    padding: 5px;
+    padding: 1vh;
 
     text-align: center;
-    font-size: 24px;
+    font-size: 3.5vh;
 }
 
 span.status{
     margin-left: 5px;
     margin-right: 5px;
 
-    color: darkgrey;
+    /* color: darkgrey; */
 }
 
 span.active{
     color: blue;
+    font-weight: bold;
 }
+
+/* Time display */
+
+
 
 #timerContainer{
     /* display: inline; */
@@ -45,20 +52,22 @@ span.active{
     border-radius: 100%;
     border: 10px solid;
 
-    width: 20vw;
-    height: 20vw;
+    width: 36vh;
+    height: 36vh;
 }
 
 #timer{
     display: flex;
     position: absolute;
-    width: 20vw;
-    height: 20vw;
+    width: 36vh;
+    height: 36vh;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 7vw;
+    font-size: 12.6vh;
 }
+
+/* Start and Reset Buttons */
 
 .startResetButtons{
     display: flex;
@@ -66,7 +75,7 @@ span.active{
     margin-left: auto;
     margin-right: auto;
 
-    margin-top: 3vw;
+    margin-top: 2vh;
 
     border: solid black 5px;
     border-radius: 50%;
@@ -76,14 +85,14 @@ span.active{
 }
 
 #startButton{
-    width: 9vw;
-    height: 10vw;
-    padding-left: 1vw;
+    width: 16.2vh;
+    height: 18vh;
+    padding-left: 1.8vh;
 }
 
 #resetButton{
-    width: 10vw;
-    height: 10vw;
+    width: 18vh;
+    height: 18vh;
 }
 
 .startResetButtons:hover{
