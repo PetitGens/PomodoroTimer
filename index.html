@@ -24,7 +24,26 @@
         <span id="breakStatus" class="status">Break</span>
     </div>
 
-    <div id="timerContainer"><div id="timer" class="timerClass"></div></div>
+    <section> <!-- Timer / duration input -->
+        <div id="timerContainer"><div id="timer" class="timerClass"></div></div>
+
+        <div id="durationInput" class="hidden">
+            <div>
+                <label>
+                    Work Time (minutes) :
+                    <input id="workDuration" type="number" min="0" max="99" required value="25">    
+                </label>
+                
+            </div>
+            <div>
+                <label>
+                    Break Time (minutes) : 
+                    <input id="breakDuration" type="number" min="0" max="99" required value="5">
+                </label>
+            </div>
+            
+        </div>
+    </section>
 
     <section id="buttonsSection">
         <div id="startButton" class="startResetButtons">
