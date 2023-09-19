@@ -1,11 +1,113 @@
-:root{
+body{
     background-color: tomato;
+    font-family: "Mooli", sans-serif;
 }
 
 h1{
     text-align: center;
+    font-size: 5vh;
+    
+    font-family: "Sofia", sans-serif;
 }
 
-button.hidden {
+/* Status Bar (indicates if the user should work or do a break) */
+
+#statusBar{
+    margin-left: auto;
+    margin-right: auto;
+    
+    width: fit-content;
+    border: solid;
+    
+    padding: 1vh;
+
+    text-align: center;
+    font-size: 3.5vh;
+}
+
+span.status{
+    margin-left: 5px;
+    margin-right: 5px;
+
+    /* color: darkgrey; */
+}
+
+span.active{
+    color: blue;
+    font-weight: bold;
+}
+
+/* Time display */
+
+
+
+#timerContainer{
+    /* display: inline; */
+
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+
+    /*Circular border*/
+    border-radius: 100%;
+    border: 10px solid;
+
+    width: 36vh;
+    height: 36vh;
+}
+
+#timer{
+    display: flex;
+    position: absolute;
+    width: 36vh;
+    height: 36vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 12.6vh;
+}
+
+/* Start and Reset Buttons */
+
+.startResetButtons{
+    display: flex;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 2vh;
+
+    border: solid black 5px;
+    border-radius: 50%;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#startButton{
+    width: 16.2vh;
+    height: 18vh;
+    padding-left: 1.8vh;
+}
+
+#resetButton{
+    width: 18vh;
+    height: 18vh;
+}
+
+.startResetButtons:hover{
+    border-color: #0E2C5C;
+}
+
+.startResetButtons > img{
+    width: 65%;
+    height: 65%;
+}
+
+div.hidden{
+    display: none;
+}
+
+img.hidden{
     display: none;
 }

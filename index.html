@@ -1,26 +1,40 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timer Pomodoro</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mooli">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 </head>
 <body>
-    <h1>Timer Pomodoro</h1>
 
-    <div>
-        <span>Travail</span>
+<header>
+    <h1>POMODORO TIMER</h1>
+</header>
+
+<main>
+    <div id="statusBar">
+        <span id="workingStatus" class="status">Work</span>
         |
-        <span>Pause</span>
+        <span id="breakStatus" class="status">Break</span>
     </div>
 
-    <div><span id="timer"></span></div>
+    <div id="timerContainer"><div id="timer" class="timerClass"></div></div>
 
-    <button id="startButton">Démarrer</button>
-    <button id="resetButton">Réinitialiser</button>
+    <div id="startButton" class="startResetButtons">
+        <img src="img/play-button-blue.png" alt="blue play button" id="playButtonBlue" class="hidden">
+        <img src="img/play-button-black.png" alt="black play button" id="playButtonBlack" >
+    </div>
+
+    <div id="resetButton" class="startResetButtons">
+        <img src="img/restart-button-black.png" alt="black restart button" id="restartButtonBlack">
+        <img src="img/restart-button-blue.png" alt="blue restart button" id="restartButtonBlue" class="hidden">
+    </div>
 
     <!--JavaScript-->
     <script src="js/app.js"></script>
+</main>
 </body>
 </html>
