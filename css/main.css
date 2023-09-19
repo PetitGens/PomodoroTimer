@@ -42,8 +42,6 @@ span.active{
 
 
 #timerContainer{
-    /* display: inline; */
-
     margin-top: 2em;
     margin-left: auto;
     margin-right: auto;
@@ -68,6 +66,10 @@ span.active{
 }
 
 /* Start and Reset Buttons */
+
+#buttonsSection{
+    display: flex;
+}
 
 .startResetButtons{
     display: flex;
@@ -102,6 +104,30 @@ span.active{
 .startResetButtons > img{
     width: 65%;
     height: 65%;
+}
+
+/* Settings button */
+
+.settingsButton{
+    display: inline;
+    margin-top: 2vh;
+    margin-right: auto;
+    width: fit-content;
+
+    /* Fontawesome icon's style */
+    font-size: 18vh;
+}
+
+#activeSettingsButton{
+    color: black;
+}
+
+#activeSettingsButton:hover{
+    color: #0E2C5C;
+}
+
+#inactiveSettingsButton{
+    color: #ababab;
 }
 
 div.hidden{
