@@ -20,29 +20,29 @@ let currentState = IDLE_STATE;
 
 // DOM elements
 
-let startButton = document.getElementById("startButton");
-let resetButton = document.getElementById("resetButton");
+const startButton = document.getElementById("startButton");
+const resetButton = document.getElementById("resetButton");
 resetButton.classList.add("hidden");
 
 startButton.addEventListener("click", startTimersLoop);
 resetButton.addEventListener("click", resetTimer);
 
-let workingStatus = document.getElementById("workingStatus");
-let breakStatus = document.getElementById("breakStatus");
+const workingStatus = document.getElementById("workingStatus");
+const breakStatus = document.getElementById("breakStatus");
 
-let playButtonBlack = document.getElementById("playButtonBlack");
-let playButtonBlue = document.getElementById("playButtonBlue");
-let restartButtonBlack = document.getElementById("restartButtonBlack");
-let restartButtonBlue = document.getElementById("restartButtonBlue");
+const playButtonBlack = document.getElementById("playButtonBlack");
+const playButtonBlue = document.getElementById("playButtonBlue");
+const restartButtonBlack = document.getElementById("restartButtonBlack");
+const restartButtonBlue = document.getElementById("restartButtonBlue");
 
-let activeSettingsButton = document.getElementById("activeSettingsButton");
-let inactiveSettingsButton = document.getElementById("inactiveSettingsButton");
+const activeSettingsButton = document.getElementById("activeSettingsButton");
+const inactiveSettingsButton = document.getElementById("inactiveSettingsButton");
 
-let timerContainer = document.getElementById("timerContainer");
+const timerContainer = document.getElementById("timerContainer");
 
-let durationInputArea = document.getElementById("durationInput");
-let workDurationField = document.getElementById("workDuration");
-let breakDurationField = document.getElementById("breakDuration");
+const durationInputArea = document.getElementById("durationInput");
+const workDurationField = document.getElementById("workDuration");
+const breakDurationField = document.getElementById("breakDuration");
 
 // Switches between timer and duration input when the gear icon is clicked
 activeSettingsButton.addEventListener("click", onGearClicked);
@@ -73,10 +73,10 @@ resetButton.addEventListener("mouseleave", () =>{
 updateTimerDisplay();
 
 function updateTimerDisplay(){
-    let timerElement = document.getElementById("timer");
+    const timerElement = document.getElementById("timer");
  
-    let secondsString = seconds.toString().padStart(2, '0');
-    let minutesString = minutes.toString().padStart(2, '0');
+    const secondsString = seconds.toString().padStart(2, '0');
+    const minutesString = minutes.toString().padStart(2, '0');
 
     timerElement.textContent = `${minutesString}:${secondsString}`;
 }
@@ -188,8 +188,8 @@ function toggleSettingsButtonActivity(){
 
 function onGearClicked(){
     if(settingsTabOpen){
-        let workDurationValue = Number.parseInt(workDurationField.value);
-        let breakDurationValue = Number.parseInt(breakDurationField.value);
+        const workDurationValue = Number.parseInt(workDurationField.value);
+        const breakDurationValue = Number.parseInt(breakDurationField.value);
 
         if(workDurationValue < 0 || workDurationValue > 99){
             workDurationField.classList.add("invalid");
