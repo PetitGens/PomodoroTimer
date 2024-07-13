@@ -1,6 +1,5 @@
-const DEBUGGING = false;
-
-const INTERVAL = DEBUGGING ? 1 : 10; // Should be 1000 if not debugging
+// Timer refresh interval in milliseconds
+const REFRESH_INTERVAL = 10;
 
 const IDLE_STATE = 2
 const WORKING_STATE = 0;
@@ -171,7 +170,7 @@ function startTimer(){
 
     intervalID = setInterval(() => {
         updateTimerDisplay();
-    }, INTERVAL);
+    }, REFRESH_INTERVAL);
 }
 
 function toggleStartResetButtons(){
