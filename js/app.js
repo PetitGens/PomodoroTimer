@@ -147,11 +147,8 @@ function resetTimer(){
 
     clearInterval(intervalID);
 
-    seconds = 0;
-    minutes = workingTime;
-    updateTimerDisplay();
-
     currentState = IDLE_STATE;
+    updateTimerDisplay();
     updateStatusDisplay();
 
     toggleStartResetButtons();
