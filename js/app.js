@@ -1,6 +1,6 @@
 const DEBUGGING = false;
 
-const INTERVAL = DEBUGGING ? 1 : 1000; // Should be 1000 if not debugging
+const INTERVAL = DEBUGGING ? 1 : 10; // Should be 1000 if not debugging
 
 const IDLE_STATE = 2
 const WORKING_STATE = 0;
@@ -11,8 +11,7 @@ let settingsTabOpen = false;
 let workingTime = 25;
 let breakTime = 5;
 
-let seconds = 0;
-let minutes = workingTime;
+let startingTime;
 
 let intervalID;
 
@@ -69,16 +68,34 @@ resetButton.addEventListener("mouseleave", () =>{
     restartButtonBlue.classList.toggle("hidden");
 })
 
-
 updateTimerDisplay();
 
 function updateTimerDisplay(){
     const timerElement = document.getElementById("timer");
+    
+    if(currentState === IDLE_STATE){
+        timerElement.textContent = `${workingTime.toString().padStart(2, '0')}:00`;
+        return;
+    }
  
-    const secondsString = seconds.toString().padStart(2, '0');
-    const minutesString = minutes.toString().padStart(2, '0');
+    // Elased time in milliseconds
+    const elapsed = new Date() - startingTime;
 
-    timerElement.textContent = `${minutesString}:${secondsString}`;
+    const currentTimerTime = currentState === WORKING_STATE ? workingTime : breakTime;
+
+    // Remaining time in milliseconds
+    const remaining = currentTimerTime * 60000 - elapsed;
+
+    if(remaining <= 0){
+        timerElement.textContent = "00:00";
+        onTimeOut();
+        return;
+    }
+
+    minutes = Math.floor(remaining / 60000).toString().padStart(2, '0');
+    seconds = Math.floor((remaining % 60000) / 1000).toString().padStart(2, '0');
+
+    timerElement.textContent = `${minutes}:${seconds}`;
 }
 
 function updateStatusDisplay(){
@@ -112,19 +129,6 @@ function makeStatusElementActive(element, active){
 
     else if(! active && element.classList.remove("active")){
         element.classList.remove("active");
-    }
-}
-
-function decrementTimer(){
-    seconds--;
-    if(seconds < 0){
-        seconds += 60;
-        minutes --;
-    }
-    updateTimerDisplay();
-
-    if(seconds === 0 && minutes === 0){
-        onTimeOut(); // Stops the countdown when it reaches 0
     }
 }
 
@@ -164,16 +168,13 @@ function startTimersLoop(){
 }
 
 function startTimer(){
-    minutes = breakTime;
-    seconds = 0;
-
-    if(currentState === WORKING_STATE){
-        minutes = workingTime;
-    }
+    startingTime = new Date()
 
     updateTimerDisplay();
 
-    intervalID = setInterval(() => decrementTimer(), INTERVAL);
+    intervalID = setInterval(() => {
+        updateTimerDisplay();
+    }, INTERVAL);
 }
 
 function toggleStartResetButtons(){
